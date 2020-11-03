@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="This is social network html5 template available in themeforest......" />
+		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
+		<meta name="robots" content="index, follow" />
+		<title>InterpretMe</title>
+
+    <!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="/bootstrap.min.css" />
+
+		<link rel="stylesheet" href="/styles.css" />
+		<link rel="stylesheet" href="/ionicons.min.css" />
+		<link rel="stylesheet" href="/font-awesome.min.css" />
+		<link href="css/emoji.css" rel="stylesheet">
+		<script src="https://kit.fontawesome.com/f776ee7346.js" crossorigin="anonymous"></script>
+
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+
+	</head>
+  <body id="feedBody">
+
+    <!-- Header
+    ================================================= -->
+		<header id="header">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          <h1>InterpretMe</h1>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right main-menu">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="images/down-arrow.png" alt="" /></span></a>
+                <ul class="dropdown-menu newsfeed-home">
+									<li><a href="/logout">Log Out</a></li>
+									<li><a href="/unlink/local">Delete Profile</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="images/down-arrow.png" alt="" /></span></a>
+                <ul class="dropdown-menu newsfeed-home">
+                  <li><a href="/feed">Newsfeed</a></li>
+									<li><a href="/profile">Profile</a></li>
+                </ul>
+              </li>
+              <li class="dropdown"><a href="https://www.rebeccacandelario.com/">About</a></li>
+            </ul>
+            <form class="navbar-form navbar-right hidden-sm">
+              <div class="form-group">
+
+              </div>
+            </form>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+      </nav>
+    </header>
+    <!--Header End-->
+
+    <div id="page-contents" class="yeah">
+    	<div class="container">
+    		<div class="row profRow">
+
+          <!-- Newsfeed Common Side Bar Left
+          ================================================= -->
+    			<div class="col-md-3 static">
+
+            <ul class="nav-news-feed">
+				 			 <!-- <ul class="links" id="messagesSide"> -->
+				 				 <% for(var i=0; i<user.local.messages.length; i++) {%>
+				 					 <li class="message">
+										 <p id="envy"><i class="fas fa-envelope"></i></p>
+				 						 <span><%= user.local.messages[i].senderEmail %></span>
+				 						 <p class="messageP"><%= user.local.messages[i].message %></p>
+
+				 						 <!-- Reply To Message -->
+				 						 <form action="/directMessage" method="POST">
+				 							 <input id="senderId" type="hidden" name="recieverId" value="<%= user.local.messages[i].senderId %>">
+				 							 <input id="thisMessage" type="hidden" name="thisMessage" value="<%= user.local.messages[i].message %>">
+				 							 <input type="text" name="message" value="">
+				 							 <button id="replyButton" type="submit" name="button">Reply</button>
+				 							 <button id="deleteMessage" formaction="/deleteMessage" type="submit" name="deleteButton">Clear </button>
+				 						 </form>
+				 					 </li>
+				 				 <% } %>
+            </ul><!--news-feed links ends-->
+
+          </div>
+
+
+
+    			<div class="col-md-7">
+						<h1>Newsfeed</h1>
+
+            <!-- Post Create Box
+            ================================================= -->
+            <div class="create-post">
+							<h3 class="nope">Need help? Reach out below! Wanna help? Lend a helping hand!</h3>
+							<form action="/pictureUpload" enctype="multipart/form-data" method="post">
+								<!-- <input type="text" name="caption" value=""> -->
+								<input type="file" name="file-to-upload">
+								<textarea name="caption" cols="40" rows="5" placeholder="Need some help?"></textarea>
+								<input type="submit" value="Upload">
+							</form>
+            </div><!-- Post Create Box End-->
+
+
+
+
+
+            <!-- Post Content
+            ================================================= -->
+							<!-- <ul class="posts"> -->
+								<% for(var i=0; i<pictureUpload.length; i++) {%>
+									<div class="post-content">
+
+
+								<article class="post" id="postArticle">
+									<header>
+										<div class="title">
+
+											<h2><a href="/userProfile/<%= pictureUpload[i].posterId%>"><%= pictureUpload[i].userEmail %></h2></a>
+											<form action="/helpReq" method="POST">
+												<input type="hidden" name="recieverId" value="<%= pictureUpload[i].posterId %>">
+												<input type="text" name="message" value="Hi! I want to help you!">
+												<button type="submit" name="button">Send</button>
+											</form>
+											<!-- <p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p> -->
+										</div>
+									</header>
+									<section class="imgSec">
+									<a href="<%= pictureUpload[i].imgPath%>" class="image featured"><img id="postIMG" src="<%= pictureUpload[i].imgPath%>" alt="" /></a>
+								</section>
+									<p id="postCaption"><%= pictureUpload[i].caption %></p>
+									<!-- <ul class="stats">
+										<span><%= pictureUpload[i].likes %></span>
+											<span class="thumbsUp"><i class="fas fa-hands-helping thumbsUp"></i></i></span>
+										<div data-id="<%= pictureUpload[i]._id %>">
+									</ul> -->
+
+									<% for (let j=0; j< comments.length; j++){ %>
+										<% console.log(typeof pictureUpload[i].id, typeof comments[j].postId) %>
+											<% if(pictureUpload[i]._id.toString() === comments[j].postId.toString()){ %>
+												<% console.log('IT WORKS') %>
+										<section id="commentSec">
+											<span data-id="<%= pictureUpload[i]._id %>" > <%= comments[j].commentPosterEmail %> </span>
+											<p> <%=  comments[j].CommentPost %>
+												<% if (comments[j].commentPosterEmail === user.local.email){ %>
+												<span>
+
+													<i id="<%= comments[j]._id %>" class="fa fa-trash commentTrash"></i></span>
+												<% } %>
+												</p>
+												</section>
+												<% } %>
+
+
+
+									<% } %>
+
+									<form class="comment" action="/comment" method="POST">
+										<input type="text" name="comment" placeholder="Comment!">
+										<input type="hidden" name="pictureId" value="<%= pictureUpload[i]._id %>">
+										<button type="submit">Post Comment</button>
+									</form>
+								</article>
+							</div>
+
+								<% } %>
+							<!-- </ul> -->
+					</div>
+
+
+
+            <!-- Post Content
+            ================================================= -->
+
+            <!-- Post Content
+            ================================================= -->
+
+            <!-- Post Content
+            ================================================= -->
+
+
+            <!-- Post Content
+            ================================================= -->
+
+
+            <!-- Post Content
+            ================================================= -->
+
+
+          <!-- Newsfeed Common Side Bar Right
+          ================================================= -->
+
+					<div class="col-md-2 static">
+						<div class="suggestions" id="sticky-sidebar">
+							<h4 class="grey">Help offers:</h4>
+							<div class="follow-user">
+								<ul class="" id="">
+
+									<% for(var i=0; i<requests.length; i++) {%>
+
+										<% if (requests[i].love === "") { %>
+										<li class="message">
+											<p class="helpingP"><i class="fas fa-hands-helping"></i></p>
+											<span class="spans" id="<%= requests[i]._id %>"><%= requests[i].senderEmail %></span><br>
+											<span><%= requests[i].requests %></span><br>
+											<% if (requests[i].accept === "") { %>
+											<button class="accept" type="button" name="button" id="<%= requests[i]._id %>"><i class="fas fa-hands-helping"></i></button>
+											<button class="trashy" type="button" name="button" id="<%= requests[i]._id %>"><i class="fas fa-trash-alt"></i></button>
+											 <% } %>
+											<% if (requests[i].accept === "Accepted" && requests[i].replied ==="") { %>
+												<form action="/test" method="POST">
+													 <input id="senderId" type="hidden" name="recieverId" value="<%= requests[i].senderId %>">
+													 <input id="thisMessage" type="hidden" name="thisMessage" value="<%= requests[i].requests %>">
+													 <input class="newForm" type="text" name="message" value=""><br>
+													 <button class="done" id="<%= requests[i]._id %>" type="submit" name="button" >Reply</button>
+												 </form>
+													 <% } %>
+														<% if (requests[i].replied === "yes") { %>
+															<p id="NotThisOne">Was this helpful?</p>
+															<button class="yes" type="button" name="button" id="<%= requests[i]._id %>">Yes</button>
+															<button class="no" name="button" id="<%= requests[i]._id %>">No</button>
+															<% } %>
+															<% if (requests[i].helpful === "yes") { %>
+																<p>Send some love</p>
+																<button class="love" type="button" id="<%= requests[i]._id %>">Love</button>
+																<% } %>
+																<% if (requests[i].helpful === "no") { %>
+																	<p>Delete message</p>
+																	<button id="<%= requests[i]._id %>" class="notHelpfulDelete" type="button" name="button">Bye</button>
+
+															<% } %>
+															<% } %>
+															<% if (requests[i].love === "sent") { %>
+																<p>Your Love has been sent</p>
+																<button id="<%= requests[i]._id %>" class="loveDelete" type="button">Delete</button>
+															<% } %>
+
+
+
+										</li>
+
+									<% } %>
+								</ul>
+
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+			</div>
+		</div>
+
+    <!-- Footer
+    ================================================= -->
+
+
+    <!--preloader-->
+    <div id="spinner-wrapper">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Scripts
+    ================================================= -->
+		<script src="/jquery-3.1.1.min.js"></script>
+		<script src="/bootstrap.min.js"></script>
+		<script src="/jquery.appear.min.js"></script>
+		<script src="/jquery.incremental-counter.js"></script>
+		<script src="/script.js"></script>
+		<script type="text/javascript" src="../main.js"></script>
+
+
+		<script type="text/javascript" src="feed.js">
+
+		</script>
+  </body>
+</html>
